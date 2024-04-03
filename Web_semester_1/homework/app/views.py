@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.core.paginator import Paginator
+import string
 
 # Create your views here.
 
@@ -17,14 +18,14 @@ QUESTIONS = [
 ANSWER_QUESTIONS = [
     {
         "text": f"Test text, text text {i}"
-    } for i in range(2)
+    } for i in range(10)
 ]
 
 QUESTIONS_QUESTION = [
     {
         "title": "Questions 1",
         "text": "This is question number 1",
-        "tags": "tag_1"
+        "tag": "tag_1"
     }
 ]
 
@@ -69,8 +70,8 @@ def login(request):
 
 
 def question(request, question_id):
-
-    return render(request, 'question.html', {"answers": ANSWER_QUESTIONS, "question": QUESTIONS_QUESTION})
+    paginate_obj = paginate(ANSWER_QUESTIONS, request)
+    return render(request, 'question.html', {"answers": paginate_obj, "tags": TAGS, "members": BEST_MEMBERS, "questions": QUESTIONS_QUESTION})
 
 
 def tag(request, tag_name):
@@ -89,6 +90,16 @@ def signup(request):
 
 def paginate(object_list, request, per_page=10):
     page_num = request.GET.get('page', 1)
+    
     paginator = Paginator(object_list, 5)
+    try:
+        if not page_num.isdigit():
+            page_num = 1
+    except:
+        pass
+
+    if int(page_num) > paginator.num_pages:
+        page_num = paginator.num_pages
+
     page_obj = paginator.page(page_num)
     return page_obj
