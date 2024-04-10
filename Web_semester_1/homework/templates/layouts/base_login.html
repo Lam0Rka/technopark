@@ -5,7 +5,7 @@
 <head>
 
     <meta charset="UTF-8">
-    <title>Askme</title>
+    <title >Askme</title>
     <link rel="stylesheet" href="../static/css/bootstrap.css">
 
 </html>
@@ -14,15 +14,17 @@
 
     <nav class="navbar bg-body-tertiary">
         <div class="container-fluid container-lg">
-            <a class="navbar-brand">AskSheremetev</a>
+            <a class="navbar-brand" href="/">AskSheremetev</a>
             <form class="d-flex" role="ASK!">
                 <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
                 <button class="btn btn-outline-success" type="submit">Search</button>
             </form>
+            <a class="btn btn-primary" href="/ask" role="button">Ask</a>
             <div class="d-flex justify-content-between gap-3">
                 <div class="border">
                     <img src="{% static 'img/img.jpg' %}" width="50" height="50" />
                 </div>
+                
                 <div class="d-flex flex-column justify-content-between">
                     <div>Dr. Pepper</div>
                     <div>
